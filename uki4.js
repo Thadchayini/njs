@@ -3,6 +3,9 @@ var url = "mongodb://localhost:27017/uki";
 
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
-  console.log("Database created!");
-  db.close();
-})
+  db.dropCollection("customers", function(err, delOK) {
+    if (err) throw err;
+    if (delOK) console.log("Table deleted");
+    db.close();
+  });
+});
